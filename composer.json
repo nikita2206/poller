@@ -1,0 +1,20 @@
+{
+    "name": "nikita2206/poller",
+    "description": "Poller library can be used for polling stuff: Sockets, other processes, file system, anything!",
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "authors": [
+        {
+            "name": "Nikita Nefedov",
+            "email": "inefedor@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Poller\\": "Poller/"
+        }
+    }
+}
