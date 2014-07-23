@@ -20,10 +20,10 @@ you can use already implemented `ProcessTask` from symfony-process-poller packag
 
 This way you will just need to instantiate new `Poller\Task\TaskQueue` and enqueue all your tasks in it.
 
-    ``` php
-    $tasksQueue = new TaskQueue();
-    $tasksQueue->enqueue(new ProcessTask(new Process("command to execute")));
-    ```
+``` php
+$tasksQueue = new TaskQueue();
+$tasksQueue->enqueue(new ProcessTask(new Process("command to execute")));
+```
 
 Now you need to create a new Poller instance and pass it your queue object and how many tasks do you want to run simultaneously:
 
@@ -45,15 +45,15 @@ You can also use events on Poller, we have:
 
 You can attach your listeners using `attachListener` method, f.e.:
 
-    ``` php
-    $poller->attachListener(Poller::EVENT_TASK_STARTED_PRE, function ($eventName, NamedTask $task) {
-        echo "Task ", $task->getName(), " is gonna be started!", "\n";
-    });
+``` php
+$poller->attachListener(Poller::EVENT_TASK_STARTED_PRE, function ($eventName, NamedTask $task) {
+    echo "Task ", $task->getName(), " is gonna be started!", "\n";
+});
 
-    $poller->attachListener(Poller::EVENT_TASK_FINISHED, function ($eventName, NamedTask $task) {
-        echo "Task ", $task->getName(), " finished!", "\n";
-    });
-    ```
+$poller->attachListener(Poller::EVENT_TASK_FINISHED, function ($eventName, NamedTask $task) {
+    echo "Task ", $task->getName(), " finished!", "\n";
+});
+```
 
 ## Tasks queue
 
@@ -65,21 +65,21 @@ very readable.
 Actually Poller accepts anything that implements `Poller\Task\PollerTaskQueue` interface. So you can easily implement infinite
 queue:
 
-    ``` php
-    use Poller\Task\PollerTaskQueue;
+``` php
+use Poller\Task\PollerTaskQueue;
 
-    class InfiniteTaskQueue implements PollerTaskQueue
+class InfiniteTaskQueue implements PollerTaskQueue
+{
+
+    public function isEmpty()
     {
-
-        public function isEmpty()
-        {
-            return true;
-        }
-
-        public function dequeue()
-        {
-            return new YourOwnTask();
-        }
-
+        return true;
     }
-    ```
+
+    public function dequeue()
+    {
+        return new YourOwnTask();
+    }
+
+}
+```
