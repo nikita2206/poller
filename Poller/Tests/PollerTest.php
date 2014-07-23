@@ -67,6 +67,8 @@ class PollerTest extends \PHPUnit_Framework_TestCase
         }));
 
         $task2 = $this->getMockForAbstractClass(Task::class, [], "", false);
+
+        $task2 = $this->getMockForAbstractClass(Task::class, [], "", false);
     }
 
 }
