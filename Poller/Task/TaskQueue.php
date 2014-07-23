@@ -6,13 +6,21 @@ class TaskQueue extends \SplQueue
     implements PollerTaskQueue
 {
 
-    public function push(Task $value)
+    public function push($value)
     {
+        if ( ! $value instanceof Task) {
+            throw new \InvalidArgumentException("TaskQueue expects instance of Task only");
+        }
+
         parent::push($value);
     }
 
-    public function unshift(Task $value)
+    public function unshift($value)
     {
+        if ( ! $value instanceof Task) {
+            throw new \InvalidArgumentException("TaskQueue expects instance of Task only");
+        }
+
         parent::unshift($value);
     }
 
