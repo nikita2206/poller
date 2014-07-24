@@ -121,7 +121,11 @@ class Poller
 
     protected function pollRunning()
     {
-        foreach ($this->threads as $threadId => $task) {
+        // Do this trick because you could stop Poller in the body one of the previous tasks
+        // but when you do foreach it copies the array before iterating
+        foreach ($this->threads as $threadId => $_) {
+            $task = $this->threads[$threadId];
+
             if (false !== $task && ! $task->heartbeat()) {
                 $this->threads[$threadId] = false;
                 $this->runningThreads--;
