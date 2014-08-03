@@ -5,11 +5,25 @@ namespace Poller\Task;
 class CallbackTask implements Task
 {
 
+    /**
+     * @var callable
+     */
     protected $startCallback;
 
+    /**
+     * @var callable
+     */
     protected $heartbeatCallback;
 
+    /**
+     * @var callable
+     */
     protected $stopCallback;
+
+    /**
+     * @var int
+     */
+    protected $threadId;
 
 
     public function __construct(callable $start, callable $heartbeat, callable $stop)
@@ -19,22 +33,41 @@ class CallbackTask implements Task
         $this->stopCallback      = $stop;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function start($threadId)
     {
+        $this->threadId = $threadId;
+
         $start = $this->startCallback;
-        $start($threadId);
+        $start($this, $threadId);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function heartbeat()
     {
         $heartbeat = $this->heartbeatCallback;
-        return $heartbeat();
+        return $heartbeat($this);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function forceStop()
     {
         $stop = $this->stopCallback;
-        $stop();
+        $stop($this);
+    }
+
+    /**
+     * @return int
+     */
+    public function getThreadId()
+    {
+        return $this->threadId;
     }
 
 }

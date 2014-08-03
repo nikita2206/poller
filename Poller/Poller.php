@@ -113,6 +113,10 @@ class Poller
         }
     }
 
+    /**
+     * Destroy all the references to tasks and listeners that we have
+     * Useful for long-running scripts for cleaning circular references
+     */
     public function destroy()
     {
         $this->stop();
