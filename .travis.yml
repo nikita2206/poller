@@ -1,0 +1,6 @@
+language: php
+install:
+   - composer install --prefer-dist
+php:
+  - "5.5"
+  - "hhvm"

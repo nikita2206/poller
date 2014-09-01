@@ -1,2 +1,7 @@
-<phpunit bootstrap="vendor/autoload.php">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+    <testsuites>
+        <testsuite><directory>Poller/Tests</directory></testsuite>
+    </testsuites>
 </phpunit>
+
