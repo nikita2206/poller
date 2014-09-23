@@ -133,7 +133,7 @@ class Poller
             if (false !== $task && ! $task->heartbeat()) {
                 $this->threads[$threadId] = false;
                 $this->runningThreads--;
-                $this->dispatchEvent(self::EVENT_TASK_FINISHED, $task);
+                $this->dispatchEvent(self::EVENT_TASK_FINISHED, $task, $threadId);
             }
         }
     }
